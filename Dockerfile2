@@ -1,4 +1,8 @@
 FROM weishaw/sub2api:latest
-# 强制降级为一个没有特权的普通用户 UID (10001 是 Kubernetes 常用的非特权账号)
+# 1. 趁着还是 Root 身份，把当前工作目录（通常是 /app）的所有读写权限完全放开
+USER root
+RUN chmod -R 777 .
+
+# 2. 权限放开后，再乖乖降级成平民，满足 Choreo 的安全审核
 USER 10001
 EXPOSE 8080
