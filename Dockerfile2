@@ -1,2 +1,4 @@
 FROM weishaw/sub2api:latest
+# 强制降级为一个没有特权的普通用户 UID (10001 是 Kubernetes 常用的非特权账号)
+USER 10001
 EXPOSE 8080
